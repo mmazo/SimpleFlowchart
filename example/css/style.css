@@ -1,0 +1,60 @@
+/* --- basis elements styling --- */
+html,
+body {
+  position: aboslute;
+  top: 0px;
+  left: 0px;
+  margin: 0px;
+  padding: 0px;
+  ovrflow: hidden;
+  background-color: #dfdfdd;
+}
+
+#connections-layer {
+    z-index: 1;
+}
+
+#nodes-layer {
+    z-index: 2;
+}
+
+.layer {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+.layer path {
+    fill: none;
+    stroke: #000;
+    stroke-linecap: round;
+    stroke-width: 5;
+}
+
+.layer .node {
+  position: absolute;
+}
+
+/* --- custom nodes styling --- */
+.simple-node {
+  min-width: 70px;
+  min-height: 20px;
+  padding: 5px;
+  border: 5px solid #000000;
+  background-color: #ffffff;
+  white-space: nowrap;
+}
+
+.expression-node {
+  fill:red;
+  stroke:black;
+  stroke-width:5;
+}
+
+.decision-node {
+  fill:yellow;
+  stroke:black;
+  stroke-width:5;
+}
