@@ -6,7 +6,7 @@ About
 
 This is a small JavaScript library with single purpose - draw some nodes and connect
 them with lines. You can use this library to create your own flow charts or create
-other similar graphics. Nodes and connection lines can be styles with CSS. Node content
+other similar graphics. Nodes and connection lines can be styled with CSS. Node content
 can be whatever you want - simple div, image or SVG. 
 
 The library is depends on jQuery and jQuery UI (drag and drop and effects). 
