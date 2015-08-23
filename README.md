@@ -22,7 +22,7 @@ How to use
 The code is really small. Do not hesitate to check the source code to explore the actions.
 Feel free to extend and adjust the code to your needs. 
 
-Check out the example chart [here](mmazo.de/flowchart/).
+Check out the example chart [here](http://mmazo.de/flowchart/).
 
 Currently, you can add and delete nodes and connect them with lines (connections).
 
