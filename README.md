@@ -20,7 +20,9 @@ How to use
 ----------
 
 The code is really small. Do not hesitate to check the source code to explore the actions.
-Feel free to extend and adjust the code to your needs. Check out the example chart.
+Feel free to extend and adjust the code to your needs. 
+
+Check out the example chart [here](mmazo.de/flowchart/).
 
 Currently, you can add and delete nodes and connect them with lines (connections).
 
@@ -34,6 +36,8 @@ Current example shows additional functionality:
 
 * Add child node by clicking on the node.
 * Delete node by making right mouse click on it (context menu).
+
+Actual example also works on touch devices thanks to wonderful [Touch Punch](http://touchpunch.furf.com/).
 
 
 Contact
