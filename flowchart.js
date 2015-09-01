@@ -31,8 +31,17 @@ FlowChart.prototype.addNodeActions = function(nodeObj, chartInstanceObj){
   });
 }
 
+FlowChart.prototype.elementIndex = 0;
+
+FlowChart.prototype.nextElementIndex = function(){
+	this.elementIndex = this.elementIndex + 1;
+	return this.elementIndex;
+}
+
+FlowChart.prototype.connections = {};
+
 FlowChart.prototype.positionConnectionPoint = function(left, top, linePointType, lineObj, finishArrangement){
-    var d = lineObj.attr('d').split(' ');
+    var d = this.connections[lineObj.attr('id')].split(' ');
     if (linePointType === 'endpoint') {
       d[3] = left + ',' + top;
       if (finishArrangement) {
@@ -45,7 +54,9 @@ FlowChart.prototype.positionConnectionPoint = function(left, top, linePointType,
         d[1] = 'C' + left + ',' + top;
       }
     }
-    lineObj.attr('d', d.join(' '));
+	d = d.join(' ');
+    lineObj.attr('d', d);
+	this.connections[lineObj.attr('id')] = d;
 }
   
 FlowChart.prototype.positionConnectionLines = function(nodeObj, finishArrangement){
@@ -79,7 +90,7 @@ FlowChart.prototype.addNode = function(nodeType, parentNode) {
   // add new node to nodes layer
   var nodesLayer = this.jQueryLibraryObj('#nodes-layer');
   var currentDate = new Date();
-  var nodeId = 'node-' + (nodesLayer.find('.node').length + currentDate.getTime());
+  var nodeId = "node-" + _t.nextElementIndex();
   var nodeClass = 'node ' + nodeType;
   var node = "<div id='" + nodeId + "' class='" + nodeClass + "'>" + this.nodeTemplates[nodeType] + "</div>";
   nodesLayer.append(node);
@@ -209,20 +220,23 @@ FlowChart.prototype.addConnectionBetween = function(startNode, endNode){
 FlowChart.prototype.addConnection = function(startNode, endNode) {
   var conLayer = this.jQueryLibraryObj('#connections-layer');
   var currentDate = new Date();
-  var conId = 'line-' + (conLayer.find('path').length + currentDate.getTime());
   var startNodePos = startNode.offset();
   var endNodePos = endNode.offset();
   var conCoordinates = "M" + startNodePos.left + "," + startNodePos.top + 
-                " C" + startNodePos.left + "," + startNodePos.top + 
-                " " + endNodePos.left + "," + endNodePos.top + 
-                " " + endNodePos.left + "," + endNodePos.top;
- var newpath = document.createElementNS("http://www.w3.org/2000/svg","path");  
-     newpath.setAttributeNS(null, "id", conId);  
-     newpath.setAttributeNS(null, "d", conCoordinates);
-     newpath.setAttributeNS(null, "data-startnode", startNode.attr('id'));
-     newpath.setAttributeNS(null, "data-endnode", endNode.attr('id'));  
-     conLayer[0].appendChild(newpath);
- return conId;
+                       " C" + startNodePos.left + "," + startNodePos.top + 
+                       " " + endNodePos.left + "," + endNodePos.top + 
+                       " " + endNodePos.left + "," + endNodePos.top;
+  var newpath = document.createElementNS("http://www.w3.org/2000/svg","path");
+  newpath.setAttributeNS(null, "id", "line-" + this.nextElementIndex() );  
+  newpath.setAttributeNS(null, "d", conCoordinates);
+  newpath.setAttributeNS(null, "data-startnode", startNode.attr('id'));
+  newpath.setAttributeNS(null, "data-endnode", endNode.attr('id'));  
+  
+  conLayer[0].appendChild(newpath);
+	 	 	 			 			 							 
+	this.connections["line-" + this.elementIndex] = conCoordinates;
+   
+  return "line-" + this.elementIndex;
 }
 
 FlowChart.prototype.adjustLayersSize = function() {
