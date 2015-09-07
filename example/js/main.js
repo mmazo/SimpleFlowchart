@@ -1,10 +1,12 @@
 /**
 * Add functionality to page. This ist for testing only.
 */
+var chart = null;
+
 $(document).ready(function(){
 	
   // create the flowchart instance
-  var chart = new FlowChart($);
+  chart = new FlowChart($);
   
   // add your node templates in a key-value format
   // where key is the name and css class of the node and value is the content
@@ -35,11 +37,21 @@ $(document).ready(function(){
     });
   };
   
-  // generate some simple flowchart
-  var rootNode = chart.addNode('decision-node',null);
-  var node01 = chart.addNode('expression-node',rootNode);
-  var node02 = chart.addNode('simple-node',node01);
-  var node03 = chart.addNode('decision-node',node02);
-  var connection01 = chart.addConnectionBetween(node03,node01);
+  // import flowchart
+  var chartJSON = {
+	  nodes: [
+		{ id: 'node-0', type: 'decision-node', left: 20, top: 200},
+		{ id: 'node-1', type: 'expression-node', left: 120, top: 100},
+		{ id: 'node-2', type: 'simple-node', left: 120, top: 300}
+	  ],
+	  connections: [
+	    { start: 'node-0', end: 'node-1'},
+		{ start: 'node-0', end: 'node-2'}
+	  ]
+  };  
+  chart.importChart(chartJSON);
+  
+  //programmatically add nodes to the chart
+  var node3 = chart.addNode('expression-node', $('#node-2')); 
   
 });
